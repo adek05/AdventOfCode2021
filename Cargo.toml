@@ -18,3 +18,7 @@ path = "src/sonar_sweep.rs"
 [[bin]]
 name = "day2"
 path = "src/dive.rs"
+
+[[bin]]
+name = "day3"
+path = "src/binary_diagnostic.rs"

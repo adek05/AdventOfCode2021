@@ -46,7 +46,6 @@ fn main() {
         .map(|value| to_command(value.unwrap()).unwrap())
         .collect();
     
-        {}
     let final_position_1 = moves.iter().fold(Position {x: 0, y: 0, aim: 0}, run_command_1);
     println!("[Part 1] {}", final_position_1.x * final_position_1.y);
 
