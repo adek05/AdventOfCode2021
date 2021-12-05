@@ -26,3 +26,7 @@ path = "src/binary_diagnostic.rs"
 [[bin]]
 name = "day4"
 path = "src/giant_squid.rs"
+
+[[bin]]
+name = "day5"
+path = "src/hydrotermal_venture.rs"
