@@ -22,3 +22,7 @@ path = "src/dive.rs"
 [[bin]]
 name = "day3"
 path = "src/binary_diagnostic.rs"
+
+[[bin]]
+name = "day4"
+path = "src/giant_squid.rs"
