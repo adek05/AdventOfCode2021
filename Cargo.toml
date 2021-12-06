@@ -30,3 +30,7 @@ path = "src/giant_squid.rs"
 [[bin]]
 name = "day5"
 path = "src/hydrotermal_venture.rs"
+
+[[bin]]
+name = "day6"
+path = "src/lanternfish.rs"
