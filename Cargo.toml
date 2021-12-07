@@ -34,3 +34,7 @@ path = "src/hydrotermal_venture.rs"
 [[bin]]
 name = "day6"
 path = "src/lanternfish.rs"
+
+[[bin]]
+name = "day7"
+path = "src/treachery_whales.rs"
