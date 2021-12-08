@@ -38,3 +38,7 @@ path = "src/lanternfish.rs"
 [[bin]]
 name = "day7"
 path = "src/treachery_whales.rs"
+
+[[bin]]
+name = "day8"
+path = "src/segment_search.rs"
