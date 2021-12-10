@@ -46,3 +46,7 @@ path = "src/segment_search.rs"
 [[bin]]
 name = "day9"
 path = "src/smoke_basin.rs"
+
+[[bin]]
+name = "day10"
+path = "src/syntax_scoring.rs"
