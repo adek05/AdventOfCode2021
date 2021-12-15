@@ -50,3 +50,7 @@ path = "src/smoke_basin.rs"
 [[bin]]
 name = "day10"
 path = "src/syntax_scoring.rs"
+
+[[bin]]
+name = "day11"
+path = "src/dumbo_octopus.rs"
