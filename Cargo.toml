@@ -54,3 +54,7 @@ path = "src/syntax_scoring.rs"
 [[bin]]
 name = "day11"
 path = "src/dumbo_octopus.rs"
+
+[[bin]]
+name = "day12"
+path = "src/passage_pathing.rs"
