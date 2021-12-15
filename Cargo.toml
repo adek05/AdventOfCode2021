@@ -58,3 +58,7 @@ path = "src/dumbo_octopus.rs"
 [[bin]]
 name = "day12"
 path = "src/passage_pathing.rs"
+
+[[bin]]
+name = "day13"
+path = "src/transparent_origami.rs"
