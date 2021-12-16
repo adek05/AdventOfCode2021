@@ -37,9 +37,9 @@ fn flip_on_y(p: Point, y: i32) -> Point {
 }
 
 fn transform(p: Point, t: &Transform) -> Point {
-    match t {
-        &Transform::FlipX(x) => flip_on_x(p, x),
-        &Transform::FlipY(y) => flip_on_y(p, y),
+    match *t {
+        Transform::FlipX(x) => flip_on_x(p, x),
+        Transform::FlipY(y) => flip_on_y(p, y),
     }
 }
 
@@ -79,7 +79,7 @@ fn main() {
     let max_x = (after_folds.iter().map(|p| p.y).max().unwrap() + 1) as usize;
 
     let mut output: Vec<String> = vec![];
-    for x in 0..max_x {
+    for _ in 0..max_x {
         output.push(".".repeat(max_y));
     }
     for Point { x, y } in after_folds.iter() {
