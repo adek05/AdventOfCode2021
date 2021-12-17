@@ -62,3 +62,11 @@ path = "src/passage_pathing.rs"
 [[bin]]
 name = "day13"
 path = "src/transparent_origami.rs"
+
+[[bin]]
+name = "day14"
+path = "src/extended_polymerization.rs"
+
+[[bin]]
+name = "day15"
+path = "src/chiton.rs"
