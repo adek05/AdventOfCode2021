@@ -70,3 +70,7 @@ path = "src/extended_polymerization.rs"
 [[bin]]
 name = "day15"
 path = "src/chiton.rs"
+
+[[bin]]
+name = "day16"
+path = "src/packet_decoder.rs"
