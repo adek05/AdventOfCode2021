@@ -74,3 +74,7 @@ path = "src/chiton.rs"
 [[bin]]
 name = "day16"
 path = "src/packet_decoder.rs"
+
+[[bin]]
+name = "day17"
+path = "src/trick_shot.rs"
