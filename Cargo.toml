@@ -78,3 +78,7 @@ path = "src/packet_decoder.rs"
 [[bin]]
 name = "day17"
 path = "src/trick_shot.rs"
+
+[[bin]]
+name = "day20"
+path = "src/trench_map.rs"
