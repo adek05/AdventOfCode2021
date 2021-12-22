@@ -1,8 +1,8 @@
 #[macro_use]
 extern crate scan_rules;
 
-use scan_rules::scanner::{Everything, Line, Newline};
 use std::collections::{HashMap, HashSet};
+use std::iter::FromIterator;
 
 #[derive(Clone, PartialEq, Eq, Hash, Debug)]
 struct Point {
@@ -64,15 +64,12 @@ fn translate(p: &Point, v: &Point) -> Point {
 fn are_same(s1: &HashSet<Point>, s2: &HashSet<Point>, at_least_n: usize) -> bool {
     let intersection_size = s1.intersection(s2).count();
     if intersection_size > 10 {
-    println!("Intersection_size {}", intersection_size);
+        println!("Intersection_size {}", intersection_size);
     }
     intersection_size >= at_least_n
 }
 
-fn do_overlap(
-    scanner: &HashSet<Point>,
-    other: &HashSet<Point>,
-) -> Option<Point> {
+fn do_overlap(scanner: &HashSet<Point>, other: &HashSet<Point>) -> Option<Point> {
     for point in scanner {
         for rotated_point in other {
             let dv = Point {
@@ -92,48 +89,37 @@ fn do_overlap(
     None
 }
 
+fn normalize_coords(rotation_id: usize, translation_v: &Point, p: &Point) -> Point {
+    translate(&rotations(rotation_id, p), translation_v)
+}
+
 fn dfs(
     graph: &HashMap<usize, Vec<(usize, (Point, usize))>>,
     scanners: &HashMap<usize, HashSet<Point>>,
     visited: &mut HashSet<usize>,
     scanner_id: usize,
-) -> HashSet<Point> {
+) -> (HashSet<Point>, HashSet<Point>) {
     if visited.contains(&scanner_id) {
-        return HashSet::new();
+        return (HashSet::new(), HashSet::new());
     }
     visited.insert(scanner_id);
-    let mut res = scanners.get(&scanner_id).unwrap().clone();
+    let mut beacons = scanners.get(&scanner_id).unwrap().clone();
+    let mut scanner_coords = HashSet::from_iter(vec![Point{x: 0, y: 0, z: 0}]);
 
-    for (other_id, (Point { x, y, z }, rotation_id)) in graph.get(&scanner_id).unwrap_or(&vec![]) {
-        res.extend(dfs(graph, scanners, visited, *other_id).iter().map(|p| {
-                translate(
-                    &rotations(
-                        *rotation_id,
-                            p,
-                    ),
-                    &Point {
-                        x: *x,
-                        y: *y,
-                        z: *z,
-                    },
-                )
-        }));
+    for (other_id, (translation_v, rotation_id)) in graph.get(&scanner_id).unwrap_or(&vec![]) {
+        let (bs, scans) = dfs(graph, scanners, visited, *other_id);
+        beacons.extend(
+            bs
+                .iter()
+                .map(|p| normalize_coords(*rotation_id, translation_v, p)),
+        );
+        scanner_coords.extend(scans.iter()
+                .map(|p| normalize_coords(*rotation_id, translation_v, p)),
+        );
     }
 
-    res
+    (beacons, scanner_coords)
 }
-
-// fn scanners(
-//     graph: &HashMap<usize, Vec<(usize, (Point, usize))>>,
-//     visited: &mut HashSet<usize>,
-//     point: Point,
-//     scanner_id: usize,
-// ): HashSet<Point> {
-//     if visited.contains(point) {
-//         return HashSet::new();
-//     }
-
-// }
 
 fn main() {
     let mut scanners: HashMap<usize, HashSet<Point>> = HashMap::new();
@@ -174,10 +160,11 @@ fn main() {
             }
         }
     }
-    let res = dfs(&graph, &scanners, &mut visited, 1);
-    println!(
-        "Total points: {}",
-        res.len()
-    );
+    let (beacons, scanners_coords) = dfs(&graph, &scanners, &mut visited, 1);
     assert_eq!(visited.len(), scanners.len());
+    assert_eq!(scanners_coords.len(), scanners.len());
+
+    println!("[Part 1] {}", beacons.len());
+    let max_dist = scanners_coords.iter().cloned().flat_map(|p| scanners_coords.iter().cloned().map(move |r| (p.x - r.x).abs() + (p.y - r.y).abs() + (p.z - r.z).abs())).max().unwrap();
+    println!("[Part 2] {}", max_dist);
 }
