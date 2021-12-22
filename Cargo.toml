@@ -80,5 +80,9 @@ name = "day17"
 path = "src/trick_shot.rs"
 
 [[bin]]
+name = "day19"
+path = "src/beacon_scanner.rs"
+
+[[bin]]
 name = "day20"
 path = "src/trench_map.rs"
