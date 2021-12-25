@@ -90,3 +90,7 @@ path = "src/trench_map.rs"
 [[bin]]
 name = "day21"
 path = "src/dirac_dice.rs"
+
+[[bin]]
+name = "day22"
+path = "src/reactor_reboot.rs"
