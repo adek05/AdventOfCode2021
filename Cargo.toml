@@ -86,3 +86,7 @@ path = "src/beacon_scanner.rs"
 [[bin]]
 name = "day20"
 path = "src/trench_map.rs"
+
+[[bin]]
+name = "day21"
+path = "src/dirac_dice.rs"

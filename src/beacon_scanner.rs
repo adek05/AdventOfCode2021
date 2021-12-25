@@ -104,16 +104,17 @@ fn dfs(
     }
     visited.insert(scanner_id);
     let mut beacons = scanners.get(&scanner_id).unwrap().clone();
-    let mut scanner_coords = HashSet::from_iter(vec![Point{x: 0, y: 0, z: 0}]);
+    let mut scanner_coords = HashSet::from_iter(vec![Point { x: 0, y: 0, z: 0 }]);
 
     for (other_id, (translation_v, rotation_id)) in graph.get(&scanner_id).unwrap_or(&vec![]) {
         let (bs, scans) = dfs(graph, scanners, visited, *other_id);
         beacons.extend(
-            bs
-                .iter()
+            bs.iter()
                 .map(|p| normalize_coords(*rotation_id, translation_v, p)),
         );
-        scanner_coords.extend(scans.iter()
+        scanner_coords.extend(
+            scans
+                .iter()
                 .map(|p| normalize_coords(*rotation_id, translation_v, p)),
         );
     }
@@ -165,6 +166,16 @@ fn main() {
     assert_eq!(scanners_coords.len(), scanners.len());
 
     println!("[Part 1] {}", beacons.len());
-    let max_dist = scanners_coords.iter().cloned().flat_map(|p| scanners_coords.iter().cloned().map(move |r| (p.x - r.x).abs() + (p.y - r.y).abs() + (p.z - r.z).abs())).max().unwrap();
+    let max_dist = scanners_coords
+        .iter()
+        .cloned()
+        .flat_map(|p| {
+            scanners_coords
+                .iter()
+                .cloned()
+                .map(move |r| (p.x - r.x).abs() + (p.y - r.y).abs() + (p.z - r.z).abs())
+        })
+        .max()
+        .unwrap();
     println!("[Part 2] {}", max_dist);
 }
