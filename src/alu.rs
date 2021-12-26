@@ -106,8 +106,8 @@ fn dfs(
         return r.clone();
     }
     if depth < programs.len() {
-        for val in 1..10 {
-            let mut new_inputs = inputs.clone();
+        for val in (1..10).rev() {
+            let mut new_inputs: Vec<i32> = inputs.iter().cloned().collect();
             new_inputs.push(val);
             if let Some(final_state) = programs[depth].iter().fold(Some(state.clone()), |s, inst| {
                 s.map(|ss| eval(&ss, &mut vec![val].into_iter(), inst))
