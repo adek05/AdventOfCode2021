@@ -98,3 +98,7 @@ path = "src/reactor_reboot.rs"
 [[bin]]
 name = "day24"
 path = "src/alu.rs"
+
+[[bin]]
+name = "day25"
+path = "src/sea_cucumber.rs"
