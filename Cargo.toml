@@ -94,3 +94,7 @@ path = "src/dirac_dice.rs"
 [[bin]]
 name = "day22"
 path = "src/reactor_reboot.rs"
+
+[[bin]]
+name = "day24"
+path = "src/alu.rs"
